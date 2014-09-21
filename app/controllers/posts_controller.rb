@@ -23,6 +23,15 @@ class PostsController < ApplicationController
   def edit
   end
 
+  # GET /posts/:latitude/:longitude?radius=10
+  def feed
+    feed_params = params.require(:longitude, :latitude, :radius)
+    feed_params[:radius] ||= 10
+
+    # Posts.where{st_intersects(lonlat, my_polygon)}.first
+    # Posts.find()
+  end
+
   # POST /posts
   # POST /posts.json
   def create
