@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :likes
+
   root :to => "posts#index"
   
   devise_for :users, :controllers => { registrations: 'registrations' }
