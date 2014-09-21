@@ -23,6 +23,18 @@ class PostsController < ApplicationController
   def edit
   end
 
+  # GET /posts/:latitude/:longitude?radius=5&old_radius=5
+  def feed
+    feed_params = params.require(:longitude, :latitude, :radius, :old_radius)
+    feed_params[:radius] ||= 10
+    feed_params[:old_radius] ||= 0
+
+    Posts.all.filter do |post|
+      location_reach = post.distance_to(feed_params[:latitude], feed_params[:longitude], :units => :km) + post.radius
+      feed_params[:old_radius] <= location_reach && location_reach <= feed_params[:radius]
+    end.sort_by { |post| post.created_at }
+  end
+
   # POST /posts
   # POST /posts.json
   def create

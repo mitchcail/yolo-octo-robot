@@ -23,30 +23,16 @@ ActiveRecord::Schema.define(version: 20140921012355) do
   add_index "likes", ["post_id"], name: "index_likes_on_post_id"
   add_index "likes", ["user_id"], name: "index_likes_on_user_id"
 
-  create_table "locations", force: true do |t|
-    t.string   "address"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-    t.string   "ip_address"
-  end
-
-  add_index "locations", ["user_id"], name: "index_locations_on_user_id"
-
   create_table "posts", force: true do |t|
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "location_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "area"
     t.integer  "user_id"
+    t.float    "radius",     default: 0.0
   end
 
-  add_index "posts", ["location_id"], name: "index_posts_on_location_id"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "users", force: true do |t|
@@ -62,14 +48,9 @@ ActiveRecord::Schema.define(version: 20140921012355) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "post_id"
-    t.string   "latitude"
-    t.string   "longitude"
-    t.string   "area"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["post_id"], name: "index_users_on_post_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

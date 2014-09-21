@@ -1,9 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  content: MyText
+  content: First Post
   user: MyString
 
 two:
-  content: MyText
+  content: First Post
   user: MyString
+  radius: 1
