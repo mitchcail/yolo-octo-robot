@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @post.user.email %>
+</p>
+<p>
+  <strong>Area:</strong>
+  <%= @post.area %>
+</p>
+<p>
+  <strong>Latitude:</strong>
+  <%= @post.latitude %>
+</p>
+<p>
+  <strong>Longitude:</strong>
+  <%= @post.longitude %>
+</p>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
