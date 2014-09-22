@@ -9,11 +9,9 @@ class User < ActiveRecord::Base
   has_many :liked_posts, through: :likes, source: :post
   has_one :location
 
+  after_validation :check_ip_address
+
   geocoded_by :current_sign_in_ip
   after_validation :geocode
-
-  geocoded_by :area
-  after_validation :geocode, :if => :area_changed?
-
 
 end
