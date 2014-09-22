@@ -11,7 +11,7 @@
   </thead>
 
   <tbody>
-    <% @posts.each do |post| %>
+    <% @feed.each do |post| %>
       <tr>
         <% if user_signed_in? %>
           <td> <%= button_to "^", post_likes_path(post) %> </td>

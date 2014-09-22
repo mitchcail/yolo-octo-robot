@@ -27,6 +27,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 group :development do
   gem 'spring'
   gem 'sqlite3'
+  gem 'pry'
 end
 
 group :production do

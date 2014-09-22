@@ -5,7 +5,12 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    #@posts = Post.all
+    @feed = []
+    @user = current_user
+    Post.all.each do |post|
+      add_feed(@user, post)
+    end
   end
 
   # GET /posts/1
@@ -42,6 +47,7 @@ class PostsController < ApplicationController
     @post.user = current_user
     @post.longitude = current_user.longitude
     @post.latitude = current_user.latitude
+    @post.radius = 40.0
 
     respond_to do |format|
       if @post.save
@@ -67,7 +73,6 @@ class PostsController < ApplicationController
       end
     end
   end
-
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
@@ -87,5 +92,12 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:content, :user, :area, :latitude, :longitude)
+    end
+
+    def add_feed(user, post)
+      total_distance = user.distance_from([post.latitude, post.longitude])
+      if total_distance <= user.radius + post.radius
+        @feed << post
+      end
     end
 end

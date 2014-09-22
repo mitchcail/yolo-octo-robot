@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   geocoded_by :current_sign_in_ip
   after_validation :geocode
 
-  geocoded_by :area
-  after_validation :geocode, :if => :area_changed?
 
-
+  def radius
+    50
+  end
 end
