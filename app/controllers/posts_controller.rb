@@ -9,7 +9,7 @@ class PostsController < ApplicationController
     @feed = []
     @user = current_user
     Post.all.each do |post|
-      add_feed(@user, @post)
+      add_feed(@user, post)
     end
   end
 
@@ -99,6 +99,5 @@ class PostsController < ApplicationController
       if total_distance <= user.radius + post.radius
         @feed << post
       end
-
     end
 end
