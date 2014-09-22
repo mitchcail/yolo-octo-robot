@@ -9,9 +9,11 @@ class User < ActiveRecord::Base
   has_many :liked_posts, through: :likes, source: :post
   has_one :location
 
-  after_validation :check_ip_address
-
   geocoded_by :current_sign_in_ip
   after_validation :geocode
 
+
+  def radius
+    50
+  end
 end
