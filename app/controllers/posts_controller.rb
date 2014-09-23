@@ -6,10 +6,14 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     #@posts = Post.all
-    @feed = []
-    @user = current_user
-    Post.all.each do |post|
-      add_feed(@user, post)
+    if user_signed_in?
+      @feed = []
+      @user = current_user
+      Post.all.each do |post|
+        add_feed(@user, post)
+      end
+    else
+      @feed = Post.all
     end
   end
 
@@ -95,7 +99,7 @@ class PostsController < ApplicationController
     end
 
     def add_feed(user, post)
-      total_distance = user.distance_from([post.latitude, post.longitude])
+      total_distance = user.distance_to([post.latitude, post.longitude])
       if total_distance <= user.radius + post.radius
         @feed << post
       end
