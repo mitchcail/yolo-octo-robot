@@ -9,6 +9,7 @@ class PostsController < ApplicationController
     if user_signed_in?
       @feed = []
       @user = current_user
+      current_user.geocode
       Post.all.each do |post|
         add_feed(@user, post)
       end
