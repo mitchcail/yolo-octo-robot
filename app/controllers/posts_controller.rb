@@ -49,6 +49,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     puts @post.user = current_user
+    current_user.geocode
     puts @post.longitude = current_user.longitude
     puts @post.latitude = current_user.latitude
     @post.radius = 40.0
