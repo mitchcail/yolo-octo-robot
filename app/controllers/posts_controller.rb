@@ -48,9 +48,9 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    @post.user = current_user
-    @post.longitude = current_user.longitude
-    @post.latitude = current_user.latitude
+    puts @post.user = current_user
+    puts @post.longitude = current_user.longitude
+    puts @post.latitude = current_user.latitude
     @post.radius = 40.0
 
     respond_to do |format|
