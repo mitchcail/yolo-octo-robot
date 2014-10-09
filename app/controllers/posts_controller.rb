@@ -22,6 +22,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @likes = @post.likes
+    @post.check_radius
   end
 
   # GET /posts/new

@@ -9,4 +9,10 @@ class Post < ActiveRecord::Base
     self.distance_from [latitude, longitude]
   end
 
+  def check_radius
+  	if self.likes.count%10 == 0
+  		radius += 40
+  	end
+  end
+
 end
